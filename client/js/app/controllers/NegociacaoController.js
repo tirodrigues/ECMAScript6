@@ -45,4 +45,23 @@ class NegociacaoController {
 
     this._inputDate.focus();
   }
+
+  importaNegociacoes() {
+    let xhr = new XMLHttpRequest();
+
+    xhr.open('GET', 'negociacoes/semana');
+    xhr.onreadystatechange = () => {
+      if(xhr.readyState == 4 ) {
+        if(xhr.status == 200) {
+          console.log('obtendo as negociacoes');
+          console.log(JSON.parse(xhr.responseText));
+        } else {
+          console.log('nao foi possivel obeter');
+          console.log(xhr.responseText);
+        }
+      }
+    };
+
+    xhr.send();
+  }
 }
