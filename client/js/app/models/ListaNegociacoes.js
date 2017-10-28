@@ -15,4 +15,12 @@ class ListaNegociacoes {
   esvazia() {
     this._negociacoes = [];
   }
+
+  ordena(criterio) {
+    this._negociacoes.sort(criterio);
+  }
+
+  inverterOrdem() {
+    this._negociacoes.reverse();
+  }
 }

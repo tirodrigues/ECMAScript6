@@ -5,11 +5,12 @@ class NegociacaoController {
     this._inputDate = $('#data');
     this._inputQuantidade = $('#quantidade');
     this._inputValor = $('#valor');
+    this._ordemAtual = '';
 
     this._listaNegociacoes = new Bind(
         new ListaNegociacoes(),
         new NegociacoesView($('#negociacoesview')),
-        'adiciona', 'esvazia');
+        'adiciona', 'esvazia', 'ordena', 'inverterOrdem');
 
     this._mensagem = new Bind(
         new Mensagem(),
@@ -60,5 +61,15 @@ class NegociacaoController {
         this._mensagem.texto = 'Negociacoes importadas com sucessso';
     })
     .catch(err => this._mensagem.texto = err);
+  }
+
+  ordena(coluna) {
+    if(this._ordemAtual == coluna) {
+      this._listaNegociacoes.inverterOrdem();
+    }
+    else {
+      this._listaNegociacoes.ordena((a, b) => a[coluna] - b[coluna]);
+    }
+    this._ordemAtual = coluna;
   }
 }
